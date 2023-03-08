@@ -1,7 +1,7 @@
-import EventsView from '../view/events-view';//так же
-import PointView from '../view/point-view';//createRoutePointTemplate
-import EditFormView from '../view/edit_form-view';//createCreatingFormTemplate
-import SortingView from '../view/sorting-view';//sorting-view
+import EventsView from '../view/events-view';
+import PointView from '../view/point-view';
+import EditFormView from '../view/edit_form-view';
+import SortingView from '../view/sorting-view';
 import { render } from '../render.js';
 
 export default class EventsPresenter {
