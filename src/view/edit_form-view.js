@@ -141,6 +141,7 @@ export default class EditFormView {
 
   getTemplate () {
     return createEditFormTemplate(this.point);
+
   }
 
   getElement() {
