@@ -1,11 +1,17 @@
 import FilterView from './view/filter-view';
+import SiteMenuView from './view/site-menu-view.js';
 import EventsPresenter from './presenter/events-presenter';
 import { render } from './render.js';
+import RoutePointsModel from './model/point-model';
+import { routePoints } from './mock/point';
 
-const siteHeader = document.querySelector('.trip-main');
-const siteMain = document.querySelector('.page-main');
-const tripPresenter = new EventsPresenter();
+const siteHeaderElement = document.querySelector('.trip-main');
+const siteMainElement = document.querySelector('.page-main');
+const tripPresenter = new EventsPresenter(siteMainElement.querySelector('.trip-events'));
 
-render(new FilterView(), siteHeader.querySelector('.trip-controls__filters'));
+const routePointsModel = new RoutePointsModel(routePoints);
 
-tripPresenter.init(siteMain.querySelector('.trip-events'));
+render(new FilterView(), siteHeaderElement.querySelector('.trip-controls__filters'));
+render(new SiteMenuView(), siteHeaderElement.querySelector('.trip-controls__navigation'));
+
+tripPresenter.init(routePointsModel);
