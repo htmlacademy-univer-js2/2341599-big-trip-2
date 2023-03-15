@@ -145,13 +145,13 @@ const createNewFormTemplate = () => (
 );
 
 export default class NewFormView {
-  getTemplate () {
-    return createNewFormTemplate;
+  get Template() {
+    return createNewFormTemplate();
   }
 
-  getElement() {
+  get Element() {
     if (!this.element){
-      this.element = createElement(this.getTemplate());
+      this.element = createElement(this.Template);
     }
 
     return this.element;
