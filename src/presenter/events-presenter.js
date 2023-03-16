@@ -5,10 +5,12 @@ import SortingView from '../view/sorting-view';
 import { render } from '../render.js';
 
 export default class EventsPresenter {
+  #eventsList = new EventsView();
+
   constructor(tripContainer) {
     this.tripContainer = tripContainer;
   }
-  #eventsList = new EventsView();
+
   init(routePointsModel) {
     this.routePointsModel = routePointsModel;
     this.boardRoutePoints = [...this.routePointsModel.RoutePoints];
@@ -20,10 +22,10 @@ export default class EventsPresenter {
       this.#renderPoint(this.boardRoutePoints[i]);
     }
   };
-  #renderPoint = (point) => {
+
+  #renderPoint(point) {
     const pointComponent = new PointView(point);
     const editPointComponent = new EditFormView(point);
-    render(pointComponent, this.#eventsList.Element);
 
     const replacePointToEdit = () => {
       this.#eventsList.Element.replaceChild(editPointComponent.Element, pointComponent.Element);
@@ -34,11 +36,17 @@ export default class EventsPresenter {
     };
 
     const onEscKeyDown = (evt) => {
-      if (evt.key === 'Escape' || evt.key === "Esc") {
+      if (evt.key === 'Escape' || evt.key === 'Esc') {
         evt.preventDefault();
         replaceEditToPoint();
         document.removeEventListener('keydown', onEscKeyDown);
       }
+    };
+
+    const editFormSubmit = (evt) => {
+      evt.preventDefault();
+      replaceEditToPoint();
+      document.removeEventListener('keydown', onEscKeyDown);
     };
     
     pointComponent.Element.querySelector('.event__rollup-btn').addEventListener('click', () => {
@@ -46,11 +54,12 @@ export default class EventsPresenter {
       document.addEventListener('keydown', onEscKeyDown);
     });
 
-    editPointComponent.Element.querySelector('.event__save-btn').addEventListener('submit', (event) => {
-      event.preventDefault();
+    editPointComponent.Element.querySelector('form').addEventListener('submit', editFormSubmit);
+
+    editPointComponent.Element.querySelector('.event__rollup-btn').addEventListener('click', () => {
       replaceEditToPoint();
-      document.removeEventListener('keydown', onEscKeyDown);
     });
 
+    render(pointComponent, this.#eventsList.Element);
   }
 }

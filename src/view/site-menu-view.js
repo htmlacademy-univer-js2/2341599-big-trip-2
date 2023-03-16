@@ -8,7 +8,7 @@ const createSiteMenuTemplate = () => (
 );
 
 export default class SiteMenuView {
-  get Template () {
+  get Template() {
     return createSiteMenuTemplate();
   }
 

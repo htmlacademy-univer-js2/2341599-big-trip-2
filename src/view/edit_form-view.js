@@ -141,7 +141,7 @@ export default class EditFormView {
     this.#point = point;
   }
 
-  get Template () {
+  get Template() {
     return createEditFormTemplate(this.#point);
 
   }

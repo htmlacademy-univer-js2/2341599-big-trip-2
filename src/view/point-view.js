@@ -68,7 +68,7 @@ export default class PointView {
     this.#point = point;
   }
 
-  get Template () {
+  get Template() {
     return createPointTemplate(this.#point);
   }
 

@@ -6,7 +6,7 @@ const createEventsTemplate = () => (
 );
 
 export default class EventsView {
-  get Template () {
+  get Template() {
     return createEventsTemplate();
   }
 
