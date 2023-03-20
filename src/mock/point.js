@@ -21,14 +21,4 @@ const generatePoint = (id) => {
 
 const routePoints = Array.from({length: routePointsCount}).map((value, index) => generatePoint (index + 1));
 
-/*const generateLocalPoint = () => ({
-  basePrice: getRandomInteger(),
-  dateFrom: dayjs().subtract(getRandomInteger(months.Min, months.Max), 'month').toISOString(),
-  dateTo: dayjs.add(getRandomInteger(months.Min, months.Max), 'month').toISOString(),
-  destination: generateDestination().id,
-  isFavorite: getRandomBoolean(),
-  offers: Array.from({length: offersLength}, ()=>generateOffer().id),
-  type: getRandomValue(types)
-});*/
-
 export{routePoints};

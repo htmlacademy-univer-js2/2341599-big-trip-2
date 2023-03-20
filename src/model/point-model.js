@@ -1,9 +1,11 @@
 export default class RoutePointsModel {
+  #routePoints = null;
+  
   constructor(routePoints) {
-    this.routePoints = routePoints;
+    this.#routePoints = routePoints;
   }
 
-  getRoutePoints () {
-    return this.routePoints;
+  get RoutePoints() {
+    return this.#routePoints;
   }
 }

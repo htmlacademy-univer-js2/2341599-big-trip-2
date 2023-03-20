@@ -4,6 +4,7 @@ const prices = {
   Min: 100,
   Max: 10000
 };
+
 const PictureNumber = {
   Min: 1,
   Max: 50

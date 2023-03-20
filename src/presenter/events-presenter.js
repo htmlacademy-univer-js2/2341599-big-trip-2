@@ -5,21 +5,61 @@ import SortingView from '../view/sorting-view';
 import { render } from '../render.js';
 
 export default class EventsPresenter {
+  #eventsList = new EventsView();
+
   constructor(tripContainer) {
-    this.eventsList = new EventsView();
     this.tripContainer = tripContainer;
   }
 
   init(routePointsModel) {
     this.routePointsModel = routePointsModel;
-    this.boardRoutePoints = [...this.routePointsModel.getRoutePoints()];
+    this.boardRoutePoints = [...this.routePointsModel.RoutePoints];
 
     render(new SortingView(), this.tripContainer);
-    render(this.eventsList, this.tripContainer);
-    render(new EditFormView(this.boardRoutePoints[0]), this.eventsList.getElement());
+    render(this.#eventsList, this.tripContainer);
 
     for (let i = 0; i < this.boardRoutePoints.length; i++){
-      render(new PointView(this.boardRoutePoints[i]), this.eventsList.getElement());
+      this.#renderPoint(this.boardRoutePoints[i]);
     }
+  };
+
+  #renderPoint(point) {
+    const pointComponent = new PointView(point);
+    const editPointComponent = new EditFormView(point);
+
+    const replacePointToEdit = () => {
+      this.#eventsList.Element.replaceChild(editPointComponent.Element, pointComponent.Element);
+    };
+
+    const replaceEditToPoint = () => {
+      this.#eventsList.Element.replaceChild(pointComponent.Element, editPointComponent.Element);
+    };
+
+    const onEscKeyDown = (evt) => {
+      if (evt.key === 'Escape' || evt.key === 'Esc') {
+        evt.preventDefault();
+        replaceEditToPoint();
+        document.removeEventListener('keydown', onEscKeyDown);
+      }
+    };
+
+    const editFormSubmit = (evt) => {
+      evt.preventDefault();
+      replaceEditToPoint();
+      document.removeEventListener('keydown', onEscKeyDown);
+    };
+    
+    pointComponent.Element.querySelector('.event__rollup-btn').addEventListener('click', () => {
+      replacePointToEdit();
+      document.addEventListener('keydown', onEscKeyDown);
+    });
+
+    editPointComponent.Element.querySelector('form').addEventListener('submit', editFormSubmit);
+
+    editPointComponent.Element.querySelector('.event__rollup-btn').addEventListener('click', () => {
+      replaceEditToPoint();
+    });
+
+    render(pointComponent, this.#eventsList.Element);
   }
 }

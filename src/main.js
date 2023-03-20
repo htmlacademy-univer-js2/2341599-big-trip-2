@@ -8,7 +8,6 @@ import { routePoints } from './mock/point';
 const siteHeaderElement = document.querySelector('.trip-main');
 const siteMainElement = document.querySelector('.page-main');
 const tripPresenter = new EventsPresenter(siteMainElement.querySelector('.trip-events'));
-
 const routePointsModel = new RoutePointsModel(routePoints);
 
 render(new FilterView(), siteHeaderElement.querySelector('.trip-controls__filters'));

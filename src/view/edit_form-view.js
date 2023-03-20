@@ -135,18 +135,20 @@ const createEditFormTemplate = (point) => {
 };
 
 export default class EditFormView {
+  #point = null;
+
   constructor(point){
-    this.point = point;
+    this.#point = point;
   }
 
-  getTemplate () {
-    return createEditFormTemplate(this.point);
+  get Template() {
+    return createEditFormTemplate(this.#point);
 
   }
 
-  getElement() {
+  get Element() {
     if (!this.element){
-      this.element = createElement(this.getTemplate());
+      this.element = createElement(this.Template);
     }
 
     return this.element;
