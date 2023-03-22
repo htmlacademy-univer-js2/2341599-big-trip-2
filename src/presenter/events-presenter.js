@@ -2,6 +2,7 @@ import EventsView from '../view/events-view';
 import PointView from '../view/point-view';
 import EditFormView from '../view/edit_form-view';
 import SortingView from '../view/sorting-view';
+import NoPointView from '../view/no-point-view';
 import { render } from '../render.js';
 
 export default class EventsPresenter {
@@ -15,11 +16,16 @@ export default class EventsPresenter {
     this.routePointsModel = routePointsModel;
     this.boardRoutePoints = [...this.routePointsModel.RoutePoints];
 
-    render(new SortingView(), this.tripContainer);
-    render(this.#eventsList, this.tripContainer);
-
-    for (let i = 0; i < this.boardRoutePoints.length; i++){
-      this.#renderPoint(this.boardRoutePoints[i]);
+    if (this.boardRoutePoints.length === 0) {
+      render(new NoPointView(), this.tripContainer);
+    }
+    else {
+      render(new SortingView(), this.tripContainer);
+      render(this.#eventsList, this.tripContainer);
+      
+      for (let i = 0; i < this.boardRoutePoints.length; i++){
+        this.#renderPoint(this.boardRoutePoints[i]);
+      }
     }
   };
 
