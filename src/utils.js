@@ -42,6 +42,8 @@ const getDate = (date) => dayjs(date).format('YYYY-MM-DD');
 const getDateTime = (date) => dayjs(date).format('DD/MM/YY hh:mm');
 const getTime = (date) => dayjs(date).format('hh:mm');
 
+const isEscape = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
+
 export{
   getRandomInteger,
   getRandomValue,
@@ -51,5 +53,6 @@ export{
   getDate,
   humanizePointDueDate,
   duration,
-  getTime
+  getTime,
+  isEscape
 };
