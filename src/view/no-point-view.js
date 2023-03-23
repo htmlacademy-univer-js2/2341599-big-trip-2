@@ -5,15 +5,15 @@ const createNoPointTemplate = () => (`<p class="trip-events__msg">Click New Even
 export default class NoPointView {
   #element = null;
 
-  get Element() {
+  get element() {
     if (!this.#element) {
-      this.#element = createElement(this.Template);
+      this.#element = createElement(this.template);
     }
 
     return this.#element;
   };
 
-  get Template() {
+  get template() {
     return createNoPointTemplate();
   }
 
