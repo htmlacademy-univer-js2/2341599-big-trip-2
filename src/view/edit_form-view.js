@@ -1,7 +1,7 @@
-import { createElement } from '../render.js';
 import { destinations } from '../mock/destination';
 import { offersByType } from '../mock/offer';
-import { getDateTime } from '../utils.js';
+import { getDateTime } from '../utils/point.js';
+import AbstractView from '../framework/view/abstract-view.js';
 
 const renderPictures = (pictures) => {
   let result = '';
@@ -134,28 +134,35 @@ const createEditFormTemplate = (point) => {
   );
 };
 
-export default class EditFormView {
+export default class EditFormView extends AbstractView{
   #point = null;
-  #element = null;
 
   constructor(point){
+    super()
     this.#point = point;
   }
 
   get template() {
     return createEditFormTemplate(this.#point);
-
   }
 
-  get element() {
-    if (!this.#element){
-      this.#element = createElement(this.template);
-    }
+  setFormSubmitHandler = (callback) => {
+    this._callback.formSubmit = callback;
+    this.element.addEventListener('submit', this.#formSubmitHandler);
+  };
 
-    return this.#element;
-  }
+  #formSubmitHandler = (evt) => {
+    evt.preventDefault();
+    this._callback.formSubmit();
+  };
 
-  removeElement() {
-    this.#element = null;
-  }
+  setFormCloseHandler = (callback) => {
+    this._callback.formClose = callback;
+    this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#formCloseHandler);
+  };
+
+  #formCloseHandler = (evt) => {
+    evt.preventDefault();
+    this._callback.formClose();
+  };
 }

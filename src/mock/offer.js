@@ -1,5 +1,5 @@
 import { prices, ElementsCount, types } from './const';
-import { getRandomInteger } from '../utils';
+import { getRandomInteger } from '../utils/common';
 
 const generateOffer = (id, pointType) => ({
   id,

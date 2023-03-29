@@ -2,20 +2,6 @@ import dayjs from 'dayjs';
 
 const totalDayMinutes = 1440;
 const totalHoursMinutes = 60;
-const getRandomInteger = (a = 0, b = 1) => {
-  const lower = Math.ceil(Math.min(a, b));
-  const upper = Math.floor(Math.max(a,b));
-
-  return Math.floor(lower + Math.random() * (upper - Math.random()));
-};
-
-const getRandomValue = (items) =>
-  items[getRandomInteger(0, items.length - 1)];
-
-const getRandomBoolean = () => {
-  const randomNumber = Math.random() >= 0.5;
-  return randomNumber;
-};
 
 const formatStringToDateWithTime = (date) =>
   dayjs(date).format('YYYY/MM/DD hh:mm');
@@ -42,17 +28,12 @@ const getDate = (date) => dayjs(date).format('YYYY-MM-DD');
 const getDateTime = (date) => dayjs(date).format('DD/MM/YY hh:mm');
 const getTime = (date) => dayjs(date).format('hh:mm');
 
-const isEscape = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
 
 export{
-  getRandomInteger,
-  getRandomValue,
-  getRandomBoolean,
   formatStringToDateWithTime,
   getDateTime,
   getDate,
   humanizePointDueDate,
   duration,
   getTime,
-  isEscape
 };

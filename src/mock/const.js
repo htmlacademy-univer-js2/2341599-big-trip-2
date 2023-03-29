@@ -1,4 +1,4 @@
-import { getRandomInteger, getRandomValue } from '../utils';
+import { getRandomInteger, getRandomValue } from '../utils/common';
 
 const prices = {
   Min: 100,

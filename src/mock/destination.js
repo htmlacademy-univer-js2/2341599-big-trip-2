@@ -1,5 +1,5 @@
 import { cities, descriptions, ElementsCount, generatePicture} from './const';
-import { getRandomValue, getRandomInteger } from '../utils';
+import { getRandomValue, getRandomInteger } from '../utils/common';
 
 const generateDestination = (id) => ({
   id,
