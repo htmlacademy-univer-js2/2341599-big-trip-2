@@ -1,4 +1,4 @@
-import { getRandomBoolean, getRandomInteger, getRandomValue } from '../utils';
+import { getRandomBoolean, getRandomInteger, getRandomValue } from '../utils/common';
 import dayjs from 'dayjs';
 import {routePointsCount, prices} from './const';
 import {offersByType} from './offer';

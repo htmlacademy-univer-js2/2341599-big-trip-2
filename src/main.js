@@ -1,7 +1,7 @@
 import FilterView from './view/filter-view';
 import SiteMenuView from './view/site-menu-view.js';
 import EventsPresenter from './presenter/events-presenter';
-import { render } from './render.js';
+import { render } from './framework/render.js';
 import RoutePointsModel from './model/point-model';
 import { routePoints } from './mock/point';
 
