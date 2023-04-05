@@ -6,7 +6,6 @@ const createEventsTemplate = () => (
 );
 
 export default class EventsView extends AbstractView{
-  
   get template() {
     return createEventsTemplate();
   }

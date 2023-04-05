@@ -34,6 +34,12 @@ const generatePicture = () => ({
   description: getRandomValue(descriptions),
 });
 
+const FilterType = {
+  EVERYTHING: 'everything',
+  FUTURE: 'future',
+  PAST: 'past',
+};
+
 export{
   types,
   cities,
@@ -42,6 +48,7 @@ export{
   prices,
   ElementsCount,
   routePointsCount,
-  generatePicture
+  generatePicture,
+  FilterType
 };
 

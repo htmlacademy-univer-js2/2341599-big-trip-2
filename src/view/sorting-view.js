@@ -26,7 +26,6 @@ const createSortingTemplate = () => (
 );
 
 export default class SortingView extends AbstractView{
-  
   get template() {
     return createSortingTemplate();
   }

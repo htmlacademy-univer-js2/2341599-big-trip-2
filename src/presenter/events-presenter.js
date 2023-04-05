@@ -23,12 +23,11 @@ export default class EventsPresenter {
     else {
       render(new SortingView(), this.tripContainer);
       render(this.#eventsList, this.tripContainer);
-      
       for (let i = 0; i < this.boardRoutePoints.length; i++){
         this.#renderPoint(this.boardRoutePoints[i]);
       }
     }
-  };
+  }
 
   #renderPoint(point) {
     const pointComponent = new PointView(point);
@@ -54,7 +53,7 @@ export default class EventsPresenter {
       replaceEditToPoint();
       document.removeEventListener('keydown', onEscKeyDown);
     };
-    
+
     pointComponent.setFormOpenEditClickHandler(() => {
       replacePointToEdit();
       document.addEventListener('keydown', onEscKeyDown);

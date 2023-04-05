@@ -138,7 +138,7 @@ export default class EditFormView extends AbstractView{
   #point = null;
 
   constructor(point){
-    super()
+    super();
     this.#point = point;
   }
 
