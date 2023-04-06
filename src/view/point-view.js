@@ -66,7 +66,7 @@ export default class PointView extends AbstractView{
   #point = null;
 
   constructor(point){
-    super()
+    super();
     this.#point = point;
   }
 
@@ -77,10 +77,10 @@ export default class PointView extends AbstractView{
   setFormOpenEditClickHandler(callback) {
     this._callback.formOpenClick = callback;
     this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#onFormOpenClick);
-  };
+  }
 
   #onFormOpenClick = (evt) => {
     evt.preventDefault();
     this._callback.formOpenClick();
-  }
+  };
 }

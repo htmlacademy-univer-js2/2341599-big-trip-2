@@ -1,6 +1,5 @@
 export default class RoutePointsModel {
   #routePoints = null;
-  
   constructor(routePoints) {
     this.#routePoints = routePoints;
   }

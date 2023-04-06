@@ -145,7 +145,6 @@ const createNewFormTemplate = () => (
 );
 
 export default class NewFormView extends AbstractView{
-  
   get template() {
     return createNewFormTemplate();
   }

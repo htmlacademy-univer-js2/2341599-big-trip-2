@@ -28,6 +28,10 @@ const getDate = (date) => dayjs(date).format('YYYY-MM-DD');
 const getDateTime = (date) => dayjs(date).format('DD/MM/YY hh:mm');
 const getTime = (date) => dayjs(date).format('hh:mm');
 
+const isPastPoint = (point) => dayjs(point.dateFrom).isBefore(dayjs());
+
+const isFuturePoint = (point) => dayjs(point.dateFrom).isAfter(dayjs());
+
 
 export{
   formatStringToDateWithTime,
@@ -36,4 +40,6 @@ export{
   humanizePointDueDate,
   duration,
   getTime,
+  isFuturePoint,
+  isPastPoint
 };
