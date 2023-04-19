@@ -1,5 +1,3 @@
-import { destinations } from '../mock/destination';
-import { offersByType } from '../mock/offer';
 import { getDateTime } from '../utils/point.js';
 import AbstractView from '../framework/view/abstract-view.js';
 
@@ -28,9 +26,9 @@ const renderOffers = (allOffers, checkedOffers) => {
   return result;
 };
 
-const createEditFormTemplate = (point) => {
-  const {basePrice, type, destination, dateFrom, dateTo, offers} = point;
-  const allPointTypeOffers = offersByType.find((offer) => offer.type === type);
+const createEditFormTemplate = (point, destinations, offers) => {
+  const {basePrice, type, destinationId, dateFrom, dateTo, offerIds} = point;
+  const allPointTypeOffers = offers.find((offer) => offer.type === type);
   return(
     `<li class="trip-events__item">
     <form class="event event--edit" action="#" method="post">
@@ -87,7 +85,7 @@ const createEditFormTemplate = (point) => {
           <label class="event__label  event__type-output" for="event-destination-1">
             ${type}
           </label>
-          <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="${destinations[destination].name}" list="destination-list-1">
+          <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="${destinations[destinationId].name}" list="destination-list-1">
           <datalist id="destination-list-1">
             <option value="Amsterdam"></option>
             <option value="Geneva"></option>
@@ -117,14 +115,14 @@ const createEditFormTemplate = (point) => {
       <section class="event__details">
         <section class="event__section  event__section--offers">
           <h3 class="event__section-title  event__section-title--offers">Offers</h3>
-          ${renderOffers(allPointTypeOffers.offers, offers)}
+          ${renderOffers(allPointTypeOffers.offers, offerIds)}
         </section>
         <section class="event__section  event__section--destination">
           <h3 class="event__section-title  event__section-title--destination">Destination</h3>
-          <p class="event__destination-description">${destinations[destination].description}</p>
+          <p class="event__destination-description">${destinations[destinationId].description}</p>
           <div class="event__photos-container">
           <div class="event__photos-tape">
-          ${renderPictures(destinations[destination].pictures)}
+          ${renderPictures(destinations[destinationId].pictures)}
           </div>
         </div>
         </section>
@@ -136,33 +134,37 @@ const createEditFormTemplate = (point) => {
 
 export default class EditFormView extends AbstractView{
   #point = null;
+  #destination = null;
+  #offers = null;
 
-  constructor(point){
+  constructor(point, destination, offers){
     super();
     this.#point = point;
+    this.#destination = destination;
+    this.#offers = offers;
   }
 
   get template() {
-    return createEditFormTemplate(this.#point);
+    return createEditFormTemplate(this.#point, this.#destination, this.#offers);
   }
+
+  setPreviewClickHandler = (callback) => {
+    this._callback.previewClick = callback;
+    this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#previewClickHandler);
+  };
+
+  #previewClickHandler = (evt) => {
+    evt.preventDefault();
+    this._callback.previewClick();
+  };
 
   setFormSubmitHandler = (callback) => {
     this._callback.formSubmit = callback;
-    this.element.addEventListener('submit', this.#formSubmitHandler);
+    this.element.querySelector('form').addEventListener('click', this.#formSubmitHandler);
   };
 
   #formSubmitHandler = (evt) => {
     evt.preventDefault();
-    this._callback.formSubmit();
-  };
-
-  setFormCloseHandler = (callback) => {
-    this._callback.formClose = callback;
-    this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#formCloseHandler);
-  };
-
-  #formCloseHandler = (evt) => {
-    evt.preventDefault();
-    this._callback.formClose();
+    this._callback.formSubmit(this.#point);
   };
 }

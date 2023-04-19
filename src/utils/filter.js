@@ -1,10 +1,15 @@
-import { FilterType } from '../mock/const';
-import { isFuturePoint, isPastPoint } from './point';
+import { isPointDateFuture, isPointDatePast, isPointDateFuturePast } from './point';
 
-const filterPoints = {
-  [FilterType.EVERYTHING]: (points) => Array.from(points),
-  [FilterType.FUTURE]: (points) => Array.from(points).filter((point) => isFuturePoint(point)),
-  [FilterType.PAST]: (points) => Array.from(points).filter((point) => isPastPoint(point))
+const FilterType = {
+  EVERYTHING: 'everything',
+  FUTURE: 'future',
+  PAST: 'past'
 };
 
-export { filterPoints };
+const filter = {
+  [FilterType.EVERYTHING]: (points) => points,
+  [FilterType.FUTURE]: (points) => points.filter((point) => isPointDateFuture(point.dateFrom) || isPointDateFuturePast(point.dateFrom, point.dateTo)),
+  [FilterType.PAST]: (points) => points.filter((point) => isPointDatePast(point.dateTo) || isPointDateFuturePast(point.dateFrom, point.dateTo)),
+};
+
+export { filter };
