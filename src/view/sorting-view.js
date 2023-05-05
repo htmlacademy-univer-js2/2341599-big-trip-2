@@ -16,7 +16,7 @@ const createSortingTemplate = () => (
   <label class="trip-sort__btn" for="sort-${SortType.TIME}">Time</label>
   </div>
   <div class="trip-sort__item  trip-sort__item--${SortType.PRICE}">
-  <input data-sort-type=${SortType.PRICE} id="sort-${SortType.PRICE}" class="trip-sort__input  visually-hidden" type="radio" name="trip-sort" value="sort-${SortType.PRICE}" checked>
+  <input data-sort-type=${SortType.PRICE} id="sort-${SortType.PRICE}" class="trip-sort__input  visually-hidden" type="radio" name="trip-sort" value="sort-${SortType.PRICE}">
   <label class="trip-sort__btn" for="sort-${SortType.PRICE}">Price</label>
   </div>
   <div class="trip-sort__item  trip-sort__item--${SortType.OFFER}">
@@ -40,7 +40,6 @@ export default class SortingView extends AbstractView{
     if (evt.target.tagName !== 'INPUT') {
       return;
     }
-    evt.preventDefault();
     this._callback.sortTypeChange(evt.target.dataset.sortType);
   };
 }
