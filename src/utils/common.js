@@ -15,24 +15,13 @@ const getRandomBoolean = () => {
 
 const isEscape = (evt) => evt.key === 'Escape' || evt.key === 'Esc';
 
-const updateItem = (items, update) => {
-  const index = items.findIndex((item) => item.id === update.id);
-
-  if (index === -1) {
-    return items;
+const capitalizeValue = (value) => {
+  if (value === false) {
+    return '';
   }
-
-  return [
-    ...items.slice(0, index),
-    update,
-    ...items.slice(index + 1),
-  ];
+  const capFirstValue = value[0].toUpperCase();
+  const restOfValue = value.slice(1);
+  return capFirstValue + restOfValue;
 };
 
-const doCapitalizeString = (string) => {
-  const firstString = string[0].toUpperCase();
-  const restOfString = string.slice(1);
-  return firstString + restOfString;
-};
-
-export {getRandomInteger, getRandomElement, isEscape, updateItem, getRandomBoolean, doCapitalizeString};
+export {getRandomInteger, getRandomElement, isEscape, getRandomBoolean, capitalizeValue};
