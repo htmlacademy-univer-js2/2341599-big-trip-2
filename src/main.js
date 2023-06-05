@@ -23,6 +23,8 @@ const filterModel = new FilterModel();
 const filterPresenter = new FilterPresenter({
   filterContainer: siteHeaderElement.querySelector('.trip-controls__filters'),
   pointsModel: pointsModel,
+  destinationsModel: destinationsModel,
+  offersModel: offersModel,
   filterModel: filterModel
 });
 filterPresenter.init();
@@ -41,9 +43,9 @@ const newPointButtonPresenter = new NewPointButtonPresenter({
   newPointButtonContainer: siteHeaderElement,
   destinationsModel: destinationsModel,
   offersModel: offersModel,
+  pointsModel: pointsModel,
   boardPresenter: boardPresenter
 });
-
 newPointButtonPresenter.init();
 
 offersModel.init().finally(() => {

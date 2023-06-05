@@ -1,5 +1,3 @@
-const SORT_TYPES_DISABLED = ['event', 'offer'];
-
 const UserAction = {
   UPDATE_POINT: 'UPDATE_POINT',
   ADD_POINT: 'ADD_POINT',
@@ -75,5 +73,5 @@ const AUTHORIZATION = 'Basic hIfpbpd204fpubd6';
 const END_POINT = 'https://18.ecmascript.pages.academy/big-trip';
 
 
-export { UserAction, UpdateType, FilterType, SortType, SortTypeDescription, PointType, PointTypeDescription, SORT_TYPES_DISABLED,
+export { UserAction, UpdateType, FilterType, SortType, SortTypeDescription, PointType, PointTypeDescription,
   ApiServiceResponseMethod, AUTHORIZATION, END_POINT, TimeLimit };
